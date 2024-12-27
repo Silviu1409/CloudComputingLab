@@ -1,0 +1,33 @@
+services:
+  # Oracle Database service
+  oracle-db:
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    container_name: oracle-db
+    environment:
+      - ORACLE_PWD=admin  # Set password for Oracle DB
+      - ORACLE_SID=XE             # Set Oracle SID (System Identifier)
+    ports:
+      - "1522:1521"                 # Expose Oracle DB port
+    volumes:
+      - oracle-data:/opt/oracle/oradata  # Persist DB data
+
+  # Backend service (Node.js app)
+  backend:
+    image: node:22                 # Use official Node.js image
+    container_name: backend-service
+    working_dir: /app
+    volumes:
+      - ./backend:/app             # Mount backend code to /app
+    environment:
+      - DB_HOST=oracle-db
+      - DB_PORT=1521
+      - DB_USER=savian
+      - DB_PASS=admin
+      - DB_SID=XE
+    ports:
+      - "3000:3000"                # Expose backend on port 3000
+    depends_on:
+      - oracle-db                  # Ensure DB is up before backend starts
+
+volumes:
+  oracle-data:
