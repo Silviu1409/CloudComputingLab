@@ -1,0 +1,70 @@
+.navbar {
+  background-color: #000;
+  color: #fff;
+}
+
+.navbar-brand img {
+  filter: brightness(0) invert(1);
+}
+
+/* Schimbă culoarea textului meniului */
+.navbar-nav .nav-link {
+  color: #ffffff; /* Auriu */
+}
+
+/* Schimbă culoarea textului când se face hover pe un element din meniu */
+.navbar-nav .nav-link:hover {
+  color: gold; /* Alb când se face hover */
+}
+
+
+.carousel-caption h5 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+.carousel-caption p {
+  color: #fff;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+.carousel img {
+  height: 400px; /* Setează o înălțime fixă pentru imagini */
+  object-fit: cover; /* Păstrează proporțiile imaginii */
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 50%; /* Poziționează textul pe mijlocul imaginii */
+  transform: translateY(-50%);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); /* Adaugă umbră textului pentru vizibilitate */
+}
+
+.carousel .d-block {
+  max-width: 100%; /* Asigură dimensiunea corectă a imaginii */
+}
+
+.card{
+  border: solid gold;
+}
+
+.card-img-top {
+  width: 100%; /* Se asigură că imaginea ocupă întreaga lățime a cardului */
+  height: 300px; /* Înălțimea dorită pentru toate imaginile */
+  object-fit: cover; /* Păstrează proporțiile și taie marginile dacă este necesar */
+
+}
+
+
+
+.btn-warning {
+  background-color: #ffc107;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
