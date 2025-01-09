@@ -1,0 +1,7 @@
+footer {
+    margin-top: auto; /* Împinge footer-ul în partea de jos */
+    background-color: #343a40; /* Culoare de fundal */
+    color: white; /* Culoare text */
+    padding: 1rem;
+    text-align: center;
+}

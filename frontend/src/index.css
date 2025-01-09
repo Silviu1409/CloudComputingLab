@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html, body {
+  height: 100%; /* Asigură înălțimea pe tot ecranul */
+  margin: 0; /* Elimină marginile implicite */
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%; /* Forțează ca conținutul să ocupe întreaga înălțime */
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Face ca pagina să aibă întotdeauna înălțimea completă a ferestrei */
+}
+
+main {
+  flex: 1; /* Asigură că conținutul principal ocupă tot spațiul disponibil */
+}
