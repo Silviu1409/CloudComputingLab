@@ -3,9 +3,18 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
+    "docker": "^1.0.0",
+    "docker-compose": "^1.1.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
+    "node.js": "^0.0.1-security",
     "oracledb": "^6.7.1"
-  }
+  },
+  
+"scripts": {
+  "start": "node app.js",
+  "dev": "nodemon app.js"
+}
+
 }
