@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Auth from './Components/Auth';
+import Register from './Components/Register';
+import Login from './Components/Login';
 import Contact from './Components/Contact';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
@@ -18,6 +20,8 @@ root.render(
       <Routes>
          <Route path="/" element={<App />} />
          <Route path="/auth" element={<Auth/>} />
+         <Route path="/register" element={<Register/>} />
+         <Route path="/login" element={<Login/>} />
          <Route path="/contact" element={<Contact/>} />
          <Route path="/offers" element={<App scrollTo="offers" />} />
 

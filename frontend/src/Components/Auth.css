@@ -1,0 +1,8 @@
+.custom-card {
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-card:hover {
+    background-color: rgb(255, 249, 212); /* Culoare de fundal la hover */
+  }
+  
