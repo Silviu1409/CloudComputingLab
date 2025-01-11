@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './Navbar.css'; 
+import './Navbar.css';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
@@ -12,17 +12,18 @@ const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
-                <a className="navbar-brand" href="#">
-                    <img 
-                        src="/logo.png" 
-                        alt="Agency Logo" 
-                        style={{ width: '70px', height: '70px' }} 
+                <NavLink className="nav-link" to="/"><a className="navbar-brand" href="#">
+                    <img
+                        src="/logo.png"
+                        alt="Agency Logo"
+                        style={{ width: '70px', height: '70px' }}
                     />
-                </a>
-                <button 
-                    className="navbar-toggler" 
-                    type="button" 
-                    data-bs-toggle="collapse" 
+                </a></NavLink>
+
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
                     data-bs-target="#navbarNav"
                 >
                     <span className="navbar-toggler-icon"></span>
