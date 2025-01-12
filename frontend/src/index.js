@@ -14,6 +14,7 @@ import AdminDashboard from './Components/AdminDashboard';
 import AdminUsers from './Components/AdminUsers';
 import AdminPackages from './Components/AdminPackages';
 import AdminReservations from './Components/AdminReservations';
+import Packages from './Components/Packages';
 
 document.title = "Prestige Travels";
 
@@ -27,7 +28,7 @@ root.render(
          <Route path="/register" element={<Register/>} />
          <Route path="/login" element={<Login/>} />
          <Route path="/contact" element={<Contact/>} />
-         <Route path="/packages" element={<App scrollTo="packages" />} />
+         <Route path="/packages" element={<Packages/>} />
          <Route path="/admindashboard" element={<AdminDashboard/>} />
          <Route path="/adminusers" element={<AdminUsers/>} />
          <Route path="/adminpackages" element={<AdminPackages/>} />
