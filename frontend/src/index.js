@@ -15,6 +15,7 @@ import AdminUsers from './Components/AdminUsers';
 import AdminPackages from './Components/AdminPackages';
 import AdminReservations from './Components/AdminReservations';
 import Packages from './Components/Packages';
+import ReservationForm from './Components/ReservationForm';
 
 document.title = "Prestige Travels";
 
@@ -33,6 +34,7 @@ root.render(
          <Route path="/adminusers" element={<AdminUsers/>} />
          <Route path="/adminpackages" element={<AdminPackages/>} />
          <Route path="/adminreservations" element={<AdminReservations/>} />
+         <Route path="/reservationform/:id" element={<ReservationForm />} />
 
       </Routes>
     </Router>
