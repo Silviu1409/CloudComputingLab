@@ -19,15 +19,29 @@ services:
     volumes:
       - ./backend:/app             # Mount backend code to /app
     environment:
+      - PORT=3000                  # Set the port for the backend service
       - DB_HOST=oracle-db
       - DB_PORT=1521
       - DB_USER=savian
       - DB_PASS=admin
       - DB_SID=XE
     ports:
-      - "4000:4000"                # Expose backend on port 3000
+      - "3000:3000"                # Expose backend on port 3000
     depends_on:
       - oracle-db                  # Ensure DB is up before backend starts
     command: ["npm", "start"]  # Comanda pentru a porni aplicația
+
+  # Application front-end service (React app)
+  frontend-app:
+    image: node:22
+    container_name: frontend-app
+    working_dir: /app
+    volumes:
+      - ./frontend:/app             # Mount frontend code to /app
+    environment:
+      - PORT=4000                   # Run the app on port 4000
+    ports:
+      - "4000:4000"                 # Map container port 4000 to host port 4000
+    command: ["npm", "start"]
 volumes:
   oracle-data:
