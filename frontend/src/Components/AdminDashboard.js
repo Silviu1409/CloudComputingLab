@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Navbar.js';
 import Footer from './Footer.js';
 import './AdminDashboard.css';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function AdminDashboard() {
   return (
@@ -22,9 +23,11 @@ function AdminDashboard() {
               <div className="card-body">
                 <h5 className="card-title fw-bold">Users</h5>
                 <p className="card-text">Manage all user accounts and their details.</p>
-                <a href="/admin/users" className="btn btn-warning">
+                <NavLink className="nav-link" to="/adminusers" >
+                <a className="btn btn-warning">
                   Manage Users
                 </a>
+                </NavLink>
               </div>
             </div>
           </div>
@@ -34,9 +37,11 @@ function AdminDashboard() {
               <div className="card-body">
                 <h5 className="card-title fw-bold">Packages</h5>
                 <p className="card-text">Add, edit, or delete available packages.</p>
-                <a href="/admin/packages" className="btn btn-warning">
+                <NavLink className="nav-link" to="/adminpackages" >
+                <a className="btn btn-warning">
                   Manage Packages
                 </a>
+                </NavLink>
               </div>
             </div>
           </div>
@@ -46,9 +51,11 @@ function AdminDashboard() {
               <div className="card-body">
                 <h5 className="card-title fw-bold">Reservations</h5>
                 <p className="card-text">View and manage all reservations.</p>
-                <a href="/admin/reservations" className="btn btn-warning">
+                <NavLink className="nav-link" to="/adminreservations" >
+                <a className="btn btn-warning">
                   Manage Reservations
                 </a>
+                </NavLink>
               </div>
             </div>
           </div>

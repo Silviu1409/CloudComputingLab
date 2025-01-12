@@ -7,8 +7,8 @@ import Footer from './Components/Footer.js';
 
 const App = ({ scrollTo }) => {
     useEffect(() => {
-        if (scrollTo === 'offers') {
-            const offersSection = document.getElementById('offers');
+        if (scrollTo === 'packages') {
+            const offersSection = document.getElementById('packages');
             if (offersSection) {
                 offersSection.scrollIntoView({ behavior: 'smooth' });
             }
@@ -17,10 +17,10 @@ const App = ({ scrollTo }) => {
 
     return (
         <div className='page-container'>
-            {/* Navbar */}
+           
             <Navbar />
 
-            {/* Carousel */}
+            
             <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel" data-bs-interval="2000" data-bs-pause="false">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
@@ -47,11 +47,10 @@ const App = ({ scrollTo }) => {
                 </div>
             </div>
 
-            {/* Oferte */}
-            <div id="offers" className="container my-5">
-                <h2 className="text-center mb-4">CELE MAI BUNE OFERTE</h2>
+            <div id="packages" className="container my-5">
+                <h2 className="text-center mb-4">CELE MAI BUNE PACHETE TURISTICE</h2>
                 <div className="row">
-                    {/* Cardurile pot fi reduse dacă sunt duplicate */}
+                    
                     <div className="col-md-6 mb-4">
                         <div className="card">
                             <img src="/paris.png" className="card-img-top" alt="Offer 1" />
@@ -95,7 +94,6 @@ const App = ({ scrollTo }) => {
                 </div>
             </div>
 
-            {/* Footer */}
             <Footer />
         </div>
     );

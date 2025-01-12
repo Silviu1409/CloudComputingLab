@@ -7,7 +7,7 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const handleOffersClick = () => {
-        navigate('/offers'); // Navighează către ruta pentru "offers"
+        navigate('/packages'); // Navighează către ruta pentru "offers"
     };
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -34,7 +34,7 @@ const Navbar = () => {
                             <NavLink className="nav-link" to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" onClick={handleOffersClick}>Oferte</a>
+                            <a className="nav-link" onClick={handleOffersClick}>Pachete</a>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/contact">Contact</NavLink>

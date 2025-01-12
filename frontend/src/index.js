@@ -11,6 +11,9 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-d
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import AdminDashboard from './Components/AdminDashboard';
+import AdminUsers from './Components/AdminUsers';
+import AdminPackages from './Components/AdminPackages';
+import AdminReservations from './Components/AdminReservations';
 
 document.title = "Prestige Travels";
 
@@ -24,8 +27,11 @@ root.render(
          <Route path="/register" element={<Register/>} />
          <Route path="/login" element={<Login/>} />
          <Route path="/contact" element={<Contact/>} />
-         <Route path="/offers" element={<App scrollTo="offers" />} />
+         <Route path="/packages" element={<App scrollTo="packages" />} />
          <Route path="/admindashboard" element={<AdminDashboard/>} />
+         <Route path="/adminusers" element={<AdminUsers/>} />
+         <Route path="/adminpackages" element={<AdminPackages/>} />
+         <Route path="/adminreservations" element={<AdminReservations/>} />
 
       </Routes>
     </Router>
