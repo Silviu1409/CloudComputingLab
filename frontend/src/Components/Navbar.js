@@ -6,9 +6,6 @@ import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
     const navigate = useNavigate();
 
-    const handleOffersClick = () => {
-        navigate('/packages'); // Navighează către ruta pentru "offers"
-    };
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
@@ -34,7 +31,7 @@ const Navbar = () => {
                             <NavLink className="nav-link" to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" onClick={handleOffersClick}>Pachete</a>
+                            <NavLink className="nav-link" to="/packages">Pachete</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/contact">Contact</NavLink>
