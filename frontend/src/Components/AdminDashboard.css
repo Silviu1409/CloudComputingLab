@@ -1,0 +1,38 @@
+.animated-title {
+    font-size: 3rem; 
+    color: white; 
+    text-shadow: 
+      -2px -2px 0 black, 
+      2px -2px 0 black, 
+      -2px 2px 0 black, 
+      2px 2px 0 black, 
+      0 0 15px #ffd900,
+      0 0 30px #ffd700, 
+      0 0 45px #ffd700;
+    position: relative;
+    animation: glow 3s infinite;
+  }
+  
+  @keyframes glow {
+    0%, 100% {
+      text-shadow: 
+        -1px -1px 0 black, 
+        1px -1px 0 black, 
+        -1px 1px 0 black, 
+        1px 1px 0 black, 
+        0 0 15px #ffde71, 
+        0 0 40px #feed00, 
+        0 0 60px #bb8600;
+    }
+    50% {
+      text-shadow: 
+        -2px -2px 0 black, 
+        2px -2px 0 black, 
+        -2px 2px 0 black, 
+        2px 2px 0 black, 
+        0 0 35px #ffc700, 
+        0 0 55px #ffc700, 
+        0 0 85px #bb8600;
+    }
+  }
+  

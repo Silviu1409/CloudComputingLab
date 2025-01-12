@@ -10,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import AdminDashboard from './Components/AdminDashboard';
 
 document.title = "Prestige Travels";
 
@@ -24,6 +25,7 @@ root.render(
          <Route path="/login" element={<Login/>} />
          <Route path="/contact" element={<Contact/>} />
          <Route path="/offers" element={<App scrollTo="offers" />} />
+         <Route path="/admindashboard" element={<AdminDashboard/>} />
 
       </Routes>
     </Router>

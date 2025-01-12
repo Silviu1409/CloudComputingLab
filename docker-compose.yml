@@ -25,7 +25,7 @@ services:
       - DB_PASS=admin
       - DB_SID=XE
     ports:
-      - "3000:3000"                # Expose backend on port 3000
+      - "4000:4000"                # Expose backend on port 3000
     depends_on:
       - oracle-db                  # Ensure DB is up before backend starts
     command: ["npm", "start"]  # Comanda pentru a porni aplicația
