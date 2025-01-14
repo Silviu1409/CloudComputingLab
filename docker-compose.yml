@@ -1,47 +1,54 @@
 services:
-  # Oracle Database service
-  oracle-db:
-    image: container-registry.oracle.com/database/express:21.3.0-xe
-    container_name: oracle-db
+  # Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend-service
     environment:
-      - ORACLE_PWD=admin  # Set password for Oracle DB
-      - ORACLE_SID=XE             # Set Oracle SID (System Identifier)
+      # - REACT_APP_USER_SERVICE_URL=http://user-management-service:3001/api/users
+      - REACT_APP_USER_SERVICE_URL=http://localhost:3001/api/users
     ports:
-      - "1522:1521"                 # Expose Oracle DB port
-    volumes:
-      - oracle-data:/opt/oracle/oradata  # Persist DB data
-
-  # Backend service (Node.js app)
-  backend:
-    image: node:22                 # Use official Node.js image
-    container_name: backend-service
-    working_dir: /app
-    volumes:
-      - ./backend:/app             # Mount backend code to /app
+      - "3000:3000"
+    depends_on:
+      - user-management-service
+    networks:
+      - my-network
+    
+  # User Management Service
+  user-management-service:
+    build:
+      context: ./backend/user-management-service
+    container_name: user-management-service
     environment:
-      - PORT=3000                  # Set the port for the backend service
-      - DB_HOST=oracle-db
+      - PORT=3001
+      - DB_HOST=user-db
       - DB_PORT=1521
-      - DB_USER=savian
+      - DB_USER=c##savian
       - DB_PASS=admin
       - DB_SID=XE
     ports:
-      - "3000:3000"                # Expose backend on port 3000
+      - "3001:3001"
     depends_on:
-      - oracle-db                  # Ensure DB is up before backend starts
-    command: ["npm", "start"]  # Comanda pentru a porni aplicația
-
-  # Application front-end service (React app)
-  frontend-app:
-    image: node:22
-    container_name: frontend-app
-    working_dir: /app
-    volumes:
-      - ./frontend:/app             # Mount frontend code to /app
+      - user-db
+    networks:
+      - my-network
+  
+  # Oracle Database for User Management
+  user-db:
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    container_name: user-db
     environment:
-      - PORT=4000                   # Run the app on port 4000
+      - ORACLE_PWD=admin
+      - ORACLE_SID=XE
     ports:
-      - "4000:4000"                 # Map container port 4000 to host port 4000
-    command: ["npm", "start"]
+      - "1522:1521"
+    volumes:
+      - user-db-data:/opt/oracle/oradata
+      - ./scripts:/docker-entrypoint-initdb.d
+    networks:
+      - my-network
 volumes:
-  oracle-data:
+  user-db-data:
+networks:
+  my-network:
+    driver: bridge

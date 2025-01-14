@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel start-backend start-frontend",
-    "start-backend": "cd backend && node db.js",
+    "start-backend": "cd backend/user-management-service && node src/index.js",
     "start-frontend": "cd frontend && npm start"
   },
   "devDependencies": {
