@@ -1,0 +1,33 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - frontend
+          - backend/user-management-service
+          - backend/package-management-service
+          - backend/reservation-service
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-dockerhub-user/${{ matrix.service }}:${{ github.sha }} ${{ matrix.service }}
+          docker tag my-dockerhub-user/${{ matrix.service }}:${{ github.sha }} my-dockerhub-user/${{ matrix.service }}:latest
+          docker push my-dockerhub-user/${{ matrix.service }}:${{ github.sha }}
+          docker push my-dockerhub-user/${{ matrix.service }}:latest
