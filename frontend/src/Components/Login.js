@@ -31,16 +31,19 @@ function Login() {
         },
         body: JSON.stringify({ email, password }),
       });
-
+  
       if (response.ok) {
         const data = await response.json();
-        
-        console.log("Login successful:", data);
-
+  
+        console.log('Login successful:', data);
+  
+        // Store the token in localStorage
         localStorage.setItem('authToken', data.token);
-
+  
+        // Redirect to the home page
         window.location.href = '/';
       } else {
+        // If the request fails, set an error message
         const errorData = await response.json();
         setError(errorData.message || 'Invalid credentials');
       }

@@ -15,6 +15,23 @@ const createPackage = async (req, res) => {
   }
 };
 
+const getPackageById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const package = await Package.findByPk(id);
+
+    if (!package) {
+      return res.status(404).json({ error: "Package not found" });
+    }
+
+    res.status(200).json(package);
+  } catch (err) {
+    console.error("Error fetching package by id:", err);
+    res.status(500).json({ error: "Error fetching package by id", details: err.message });
+  }
+};
+
 const getAllPackages = async (req, res) => {
   try {
     const packages = await Package.findAll();
@@ -62,4 +79,4 @@ const getExtendedPackageDetails = async (req, res) => {
   }
 };
 
-module.exports = { createPackage, getAllPackages, getExtendedPackageDetails };
+module.exports = { createPackage, getPackageById, getAllPackages, getExtendedPackageDetails };

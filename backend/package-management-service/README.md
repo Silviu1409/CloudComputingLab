@@ -1,11 +1,11 @@
-# User Management Service
+# Package Management Service
 
-This is a microservice for managing users in the Travel Agency System.
+This is a microservice for managing travel packages in the Travel Agency System.
 
 ## Features
-- User CRUD operations
-- JWT-based authentication
-- Role-based access control (admin, customer, guide)
+- CRUD operations for travel packages
+- API to retrieve package details
+- Supports pagination for package listings
 
 ## Setup
 1. Install dependencies:

@@ -59,8 +59,6 @@ function Register() {
   
         localStorage.setItem("authToken", data.token);
   
-        localStorage.setItem("user", JSON.stringify(data.user));
-  
         console.log("Registration and login successful:", data);
   
         window.location.href = "/";

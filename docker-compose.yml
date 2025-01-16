@@ -9,6 +9,8 @@ services:
       - REACT_APP_USER_SERVICE_URL=http://localhost:3001/api/users
       # - REACT_APP_PACKAGE_MANAGEMENT_SERVICE_URL=http://package-management-service:3002
       - REACT_APP_PACKAGE_MANAGEMENT_SERVICE_URL=http://localhost:3002
+      # - REACT_APP_RESERVATION_SERVICE_URL=http://reservation-service:3003
+      - REACT_APP_RESERVATION_SERVICE_URL=http://localhost:3003
     ports:
       - "3000:3000"
     depends_on:
@@ -83,9 +85,44 @@ services:
       - ./scripts:/docker-entrypoint-initdb.d
     networks:
       - my-network
+  
+  # Reservation Service
+  reservation-service:
+    build:
+      context: ./backend/reservation-service
+    container_name: reservation-service
+    environment:
+      - PORT=3003
+      - DB_HOST=reservation-db
+      - DB_PORT=1521
+      - DB_USER=c##savian
+      - DB_PASS=admin
+      - DB_SID=XE
+    ports:
+      - "3003:3003"
+    depends_on:
+      - reservation-db
+    networks:
+      - my-network
+  
+  # Oracle Database for Reservation
+  reservation-db:
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    container_name: reservation-db
+    environment:
+      - ORACLE_PWD=admin
+      - ORACLE_SID=XE
+    ports:
+      - "1524:1521"
+    volumes:
+      - reservation-db-data:/opt/oracle/oradata
+      - ./scripts:/docker-entrypoint-initdb.d
+    networks:
+      - my-network
 volumes:
   user-db-data:
   package-db-data:
+  reservation-db-data:
 networks:
   my-network:
     driver: bridge
