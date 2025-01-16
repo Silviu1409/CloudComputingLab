@@ -5,6 +5,7 @@ import App from './App';
 import Auth from './Components/Auth';
 import Register from './Components/Register';
 import Login from './Components/Login';
+import Profile from './Components/Profile';
 import Contact from './Components/Contact';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
@@ -28,6 +29,7 @@ root.render(
          <Route path="/auth" element={<Auth/>} />
          <Route path="/register" element={<Register/>} />
          <Route path="/login" element={<Login/>} />
+         <Route path="/profile" element={<Profile/>} />
          <Route path="/contact" element={<Contact/>} />
          <Route path="/packages" element={<Packages/>} />
          <Route path="/admindashboard" element={<AdminDashboard/>} />

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const PORT1 = process.env.PORT || 4000;
+const PORT1 = process.env.PORT || 3001;
 const PORT2 = process.env.PORT || 3000;
 
 // Middleware
@@ -14,5 +14,5 @@ app.get('/', (req, res) => {
 
 // Pornește serverul
 app.listen(PORT1, PORT2, () => {
-    console.log(`Serverul rulează la http://localhost:${PORT1} si aplicatia la http://localhost:${PORT2}`);
+    console.log(`Serviciul pentru useri rulează la http://localhost:${PORT1} si frontend-ul la http://localhost:${PORT2}`);
 });
