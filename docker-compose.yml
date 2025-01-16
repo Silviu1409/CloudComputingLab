@@ -7,6 +7,8 @@ services:
     environment:
       # - REACT_APP_USER_SERVICE_URL=http://user-management-service:3001/api/users
       - REACT_APP_USER_SERVICE_URL=http://localhost:3001/api/users
+      # - REACT_APP_PACKAGE_MANAGEMENT_SERVICE_URL=http://package-management-service:3002
+      - REACT_APP_PACKAGE_MANAGEMENT_SERVICE_URL=http://localhost:3002
     ports:
       - "3000:3000"
     depends_on:
@@ -47,8 +49,43 @@ services:
       - ./scripts:/docker-entrypoint-initdb.d
     networks:
       - my-network
+  
+  # Package Management Service
+  package-management-service:
+    build:
+      context: ./backend/package-management-service
+    container_name: package-management-service
+    environment:
+      - PORT=3002
+      - DB_HOST=package-db
+      - DB_PORT=1521
+      - DB_USER=c##savian
+      - DB_PASS=admin
+      - DB_SID=XE
+    ports:
+      - "3002:3002"
+    depends_on:
+      - package-db
+    networks:
+      - my-network
+  
+  # Oracle Database for Package Management
+  package-db:
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    container_name: package-db
+    environment:
+      - ORACLE_PWD=admin
+      - ORACLE_SID=XE
+    ports:
+      - "1523:1521"
+    volumes:
+      - package-db-data:/opt/oracle/oradata
+      - ./scripts:/docker-entrypoint-initdb.d
+    networks:
+      - my-network
 volumes:
   user-db-data:
+  package-db-data:
 networks:
   my-network:
     driver: bridge

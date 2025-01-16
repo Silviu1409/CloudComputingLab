@@ -6,6 +6,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "animate.css": "^4.1.1",
     "aos": "^2.3.4",
+    "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "cra-template": "1.2.0",
     "react": "^19.0.0",

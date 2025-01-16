@@ -24,7 +24,7 @@ RUN npm install
 COPY . .
 
 # Expose application port
-EXPOSE 3001
+EXPOSE 3002
 
 # Start the application
 CMD /bin/bash -c "sleep 10 && npm start"

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Navbar';  
 import Footer from './Footer';  
@@ -6,99 +6,139 @@ import './packages.css';
 import AOS from 'aos'; 
 import 'aos/dist/aos.css'; 
 import { Link } from 'react-router-dom';  
+import axios from 'axios';
 
 const Packages = () => {
-    useEffect(() => {
-        AOS.init();  
-    }, []);
+  const [packages, setPackages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [packagesPerPage, setPackagesPerPage] = useState(5);
+  const [totalPackages, setTotalPackages] = useState(0);
 
-    const packages = [
-        {
-            id: 1,
-            title: 'Circuit Paris',
-            imgSrc: '/paris.png',
-            price: 999,
-            availableSeats: 15,
-            guide: 'John Doe',
-            description: 'Explore the wonders of Paris with our exclusive package.',
-        },
-        {
-            id: 2,
-            title: 'City Break Londra',
-            imgSrc: '/londra.png',
-            price: 599,
-            availableSeats: 10,
-            guide: 'Jane Smith',
-            description: 'Enjoy the beautiful London with special discounts.',
-        },
-        {
-            id: 3,
-            title: 'City Break Londra',
-            imgSrc: '/londra.png',
-            price: 599,
-            availableSeats: 8,
-            guide: 'Mark Lee',
-            description: 'Enjoy the beautiful London with special discounts.',
-        },
-        {
-            id: 4,
-            title: 'City Break Londra',
-            imgSrc: '/londra.png',
-            price: 599,
-            availableSeats: 5,
-            guide: 'Emma White',
-            description: 'Enjoy the beautiful London with special discounts.',
-        },
-    ];
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_PACKAGE_MANAGEMENT_SERVICE_URL}/api/packages/extended-details`, {
+          params: {
+            _page: currentPage,
+            _limit: packagesPerPage,
+          },
+        });
+        setPackages(response.data);
+        setTotalPackages(parseInt(response.headers['x-total-count'], 10));
+      } catch (error) {
+        console.error('Error fetching packages:', error);
+      }
+    };
 
-    return (
-        <div>
-            <Navbar />
+    AOS.init();
+    fetchPackages();
+  }, [currentPage, packagesPerPage]);
 
-            <div id="packages" className="container my-5">
-                <h2 className="text-center mb-4" data-aos="fade-up" data-aos-duration="1000">
-                    CELE MAI BUNE PACHETE TURISTICE
-                </h2>
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-                <div className="row">
-                    {packages.map((pkg) => (
-                        <div className="col-md-6 mb-4" key={pkg.id}>
-                            <div className="card package-card">
-                                <img src={pkg.imgSrc} className="card-img-top" alt={pkg.title} />
-                                <div className="card-body">
-                                    <h5 className="card-title">{pkg.title}</h5>
-                                    <p className="card-text">{pkg.description}</p>
-                                    
-                                    {/* Tabel pentru detalii */}
-                                    <table className="table table-sm">
-                                        <tbody>
-                                            <tr>
-                                                <td><strong>Preț</strong></td>
-                                                <td>{pkg.price}€</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Locuri disponibile</strong></td>
-                                                <td>{pkg.availableSeats}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Ghid</strong></td>
-                                                <td>{pkg.guide}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    
-                                    
-                                    <Link to={`/reservationform/${pkg.id}`} className="btn btn-warning">Rezerva</Link>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+  const handlePackagesPerPageChange = (e) => {
+    setPackagesPerPage(parseInt(e.target.value, 10));
+    setCurrentPage(1);
+  };
+
+  const totalPages = Math.ceil(totalPackages / packagesPerPage);
+
+  return (
+    <div>
+      <Navbar />
+  
+      <div id="packages" className="container my-5">
+        <h2 className="text-center mb-4" data-aos="fade-up" data-aos-duration="1000">
+          CELE MAI BUNE PACHETE TURISTICE
+        </h2>
+  
+        <div className="row">
+          {packages.map((pkg) => (
+            <div className="col-md-6 mb-4" key={pkg.id}>
+              <div className="card package-card">
+                <img src={pkg.imgSrc || '/default.png'} className="card-img-top" alt={pkg.title} />
+                <div className="card-body">
+                  <h5 className="card-title">{pkg.title}</h5>
+                  <p className="card-text">{pkg.description}</p>
+  
+                  {/* Tabel pentru detalii */}
+                  <table className="table table-sm">
+                    <tbody>
+                      <tr>
+                        <td><strong>Preț</strong></td>
+                        <td>{pkg.price}€</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Locuri disponibile</strong></td>
+                        <td>{pkg.availableSeats}</td>
+                      </tr>
+                      {pkg.guide ? (
+                        <>
+                          <tr>
+                            <td><strong>Ghid</strong></td>
+                            <td>{pkg.guide.name}</td>
+                          </tr>
+                          {pkg.guide.language && (
+                            <tr>
+                              <td><strong>Limba cunoscută</strong></td>
+                              <td>{pkg.guide.language}</td>
+                            </tr>
+                          )}
+                        </>
+                      ) : (
+                        <tr>
+                          <td colSpan="2"><strong>Ghid</strong> - Nu există ghid disponibil</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+  
+                  <Link to={`/reservationform/${pkg.id}`} className="btn btn-warning">Rezerva</Link>
                 </div>
+              </div>
             </div>
-
-            <Footer />
+          ))}
         </div>
-    );
+  
+        {/* Pagination */}
+        <div className="pagination-container">
+          <label htmlFor="packages-per-page">Pachete pe pagina:</label>
+          <select
+            id="packages-per-page"
+            value={packagesPerPage}
+            onChange={handlePackagesPerPageChange}
+            className="ml-2"
+          >
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={15}>15</option>
+          </select>
+  
+          <nav className="mt-4">
+            {totalPackages > 0 && (
+              <ul className="pagination">
+                {[...Array(totalPages)].map((_, index) => (
+                  <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+                    <button
+                      onClick={() => handlePageChange(index + 1)}
+                      className="page-link"
+                      disabled={currentPage === index + 1}
+                    >
+                      {index + 1}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </nav>
+        </div>
+      </div>
+  
+      <Footer />
+    </div>
+  );
 };
 
 export default Packages;
