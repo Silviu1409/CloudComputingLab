@@ -29,7 +29,6 @@ Thumbs.db
 .env
 
 # npm package-lock and yarn.lock files (optional)
-package-lock.json
 yarn.lock
 
 # Docker
