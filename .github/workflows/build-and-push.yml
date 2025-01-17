@@ -15,6 +15,11 @@ jobs:
           - backend-user-management-service
           - backend-package-management-service
           - backend-reservation-service
+        path:
+          - frontend
+          - backend/user-management-service
+          - backend/package-management-service
+          - backend/reservation-service
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -27,7 +32,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t silviu1409/${{ matrix.service }}:${{ github.sha }} ${{ matrix.service }}
+          docker build -t silviu1409/${{ matrix.service }}:${{ github.sha }} ${{ matrix.path }}
           docker tag silviu1409/${{ matrix.service }}:${{ github.sha }} silviu1409/${{ matrix.service }}:latest
           docker push silviu1409/${{ matrix.service }}:${{ github.sha }}
           docker push silviu1409/${{ matrix.service }}:latest
