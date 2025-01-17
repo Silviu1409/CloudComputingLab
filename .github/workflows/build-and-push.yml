@@ -10,16 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service:
-          - frontend
-          - backend-user-management-service
-          - backend-package-management-service
-          - backend-reservation-service
-        path:
-          - frontend
-          - backend/user-management-service
-          - backend/package-management-service
-          - backend/reservation-service
+        service-paths:
+          - { service: frontend, path: frontend }
+          - { service: backend-user-management-service, path: backend/user-management-service }
+          - { service: backend-package-management-service, path: backend/package-management-service }
+          - { service: backend-reservation-service, path: backend/reservation-service }
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -32,7 +28,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t silviu1409/${{ matrix.service }}:${{ github.sha }} ${{ matrix.path }}
-          docker tag silviu1409/${{ matrix.service }}:${{ github.sha }} silviu1409/${{ matrix.service }}:latest
-          docker push silviu1409/${{ matrix.service }}:${{ github.sha }}
-          docker push silviu1409/${{ matrix.service }}:latest
+          docker build -t silviu1409/${{ matrix.service-paths.service }}:${{ github.sha }} ${{ matrix.service-paths.path }}
+          docker tag silviu1409/${{ matrix.service-paths.service }}:${{ github.sha }} silviu1409/${{ matrix.service-paths.service }}:latest
+          docker push silviu1409/${{ matrix.service-paths.service }}:${{ github.sha }}
+          docker push silviu1409/${{ matrix.service-paths.service }}:latest
