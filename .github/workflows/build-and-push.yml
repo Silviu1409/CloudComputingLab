@@ -27,7 +27,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t my-dockerhub-user/${{ matrix.service }}:${{ github.sha }} ${{ matrix.service }}
-          docker tag my-dockerhub-user/${{ matrix.service }}:${{ github.sha }} my-dockerhub-user/${{ matrix.service }}:latest
-          docker push my-dockerhub-user/${{ matrix.service }}:${{ github.sha }}
-          docker push my-dockerhub-user/${{ matrix.service }}:latest
+          docker build -t silviu1409/${{ matrix.service }}:${{ github.sha }} ${{ matrix.service }}
+          docker tag silviu1409/${{ matrix.service }}:${{ github.sha }} silviu1409/${{ matrix.service }}:latest
+          docker push silviu1409/${{ matrix.service }}:${{ github.sha }}
+          docker push silviu1409/${{ matrix.service }}:latest
