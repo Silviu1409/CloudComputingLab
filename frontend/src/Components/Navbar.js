@@ -11,7 +11,6 @@ const Navbar = () => {
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
-            // Optionally, fetch user info from backend (could be decoded from token)
             const fetchUserInfo = async () => {
                 try {
                     const response = await fetch(`${process.env.REACT_APP_USER_SERVICE_URL}/get-user-by-token`, {
@@ -22,11 +21,13 @@ const Navbar = () => {
                         const user = await response.json();
                         setUserInfo(user);
                         setIsLoggedIn(true);
+
+                        localStorage.setItem('userRole', user.role); // Save the user role to localStorage
                     } else {
                         setIsLoggedIn(false);
                     }
                 } catch (err) {
-                    console.error("Error fetching user info:", err);
+                    console.error('Error fetching user info:', err);
                     setIsLoggedIn(false);
                 }
             };
@@ -37,12 +38,15 @@ const Navbar = () => {
     }, []);
 
     const handleLogout = () => {
-        // Clear token from localStorage
+        // Clear token and role from localStorage
         localStorage.removeItem('authToken');
+        localStorage.removeItem('userRole');
         setIsLoggedIn(false);
         setUserInfo(null);
         navigate('/auth'); // Redirect to the login page after logout
     };
+
+    const userRole = localStorage.getItem('userRole'); // Get user role from localStorage
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -50,9 +54,9 @@ const Navbar = () => {
                 <NavLink className="nav-link" to="/">
                     <span className="navbar-brand">
                         <img
-                        src="/logo.png"
-                        alt="Agency Logo"
-                        style={{ width: '70px', height: '70px' }}
+                            src="/logo.png"
+                            alt="Agency Logo"
+                            style={{ width: '70px', height: '70px' }}
                         />
                     </span>
                 </NavLink>
@@ -86,6 +90,22 @@ const Navbar = () => {
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to="/profile">Profil</NavLink>
                                 </li>
+                                {userRole === 'admin' && (
+                                    <>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link" to="/admindashboard">Admin Dashboard</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link" to="/adminusers">Admin Users</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link" to="/adminpackages">Admin Packages</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link" to="/adminreservations">Admin Reservations</NavLink>
+                                        </li>
+                                    </>
+                                )}
                                 <li className="nav-item">
                                     <a className="nav-link" href="#" onClick={handleLogout}>Logout</a>
                                 </li>

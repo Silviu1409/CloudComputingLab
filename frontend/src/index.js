@@ -11,6 +11,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import AdminRoute from './Components/AdminRoute';
 import AdminDashboard from './Components/AdminDashboard';
 import AdminUsers from './Components/AdminUsers';
 import AdminPackages from './Components/AdminPackages';
@@ -32,10 +33,38 @@ root.render(
          <Route path="/profile" element={<Profile/>} />
          <Route path="/contact" element={<Contact/>} />
          <Route path="/packages" element={<Packages/>} />
-         <Route path="/admindashboard" element={<AdminDashboard/>} />
-         <Route path="/adminusers" element={<AdminUsers/>} />
-         <Route path="/adminpackages" element={<AdminPackages/>} />
-         <Route path="/adminreservations" element={<AdminReservations/>} />
+         <Route
+              path="/admindashboard"
+              element={
+                  <AdminRoute>
+                      <AdminDashboard />
+                  </AdminRoute>
+              }
+          />
+          <Route
+              path="/adminusers"
+              element={
+                  <AdminRoute>
+                      <AdminUsers />
+                  </AdminRoute>
+              }
+          />
+          <Route
+              path="/adminpackages"
+              element={
+                  <AdminRoute>
+                      <AdminPackages />
+                  </AdminRoute>
+              }
+          />
+          <Route
+              path="/adminreservations"
+              element={
+                  <AdminRoute>
+                      <AdminReservations />
+                  </AdminRoute>
+              }
+          />
          <Route path="/reservationform/:id" element={<ReservationForm />} />
 
       </Routes>
