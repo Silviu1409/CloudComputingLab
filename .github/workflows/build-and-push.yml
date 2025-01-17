@@ -12,9 +12,9 @@ jobs:
       matrix:
         service:
           - frontend
-          - backend/user-management-service
-          - backend/package-management-service
-          - backend/reservation-service
+          - backend-user-management-service
+          - backend-package-management-service
+          - backend-reservation-service
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
